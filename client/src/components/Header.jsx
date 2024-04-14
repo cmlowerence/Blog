@@ -1,12 +1,15 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { FaMoon } from "react-icons/fa";
-import { useSelector } from 'react-redux';
+import { FaMoon, FaSun } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../redux/theme/theme.slice";
 
 export default function Header() {
-  const {currentUser} = useSelector(state=>state.user);
+  const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const path = useLocation().pathname;
+  const { theme } = useSelector((state) => state.theme);
   return (
     <Navbar className="border-b-2">
       <Link
@@ -27,52 +30,52 @@ export default function Header() {
         />
       </form>
       <Button
-        className="w-12 h-10 lg:hidden hover:bg-black/10 flex justify-center items-center"
+        className="w-12 h-10 lg:hidden hover:bg-black/10 dark:hover:bg-white/10 flex justify-center items-center"
         color="grey"
       >
         <AiOutlineSearch size={20} />
       </Button>
       <div className="flex gap-2 md:order-2">
-        <Button className="w-12 h-10 hidden sm:inline" color="grey" pill>
-          <FaMoon />
+        <Button
+          pill
+          className="w-12 h-10 hidden sm:inline hover:bg-black/10 dark:hover:bg-white/10"
+          color="grey"
+          onClick={() => dispatch(toggleTheme())}
+        >
+          {theme === 'dark' ? <FaSun /> : <FaMoon />}
         </Button>
-        { currentUser ? (
+        {currentUser ? (
           <Dropdown
             arrowIcon={false}
             inline
             label={
-              <Avatar
-                alt='user'
-                img={currentUser.profilePicture}
-                rounded
-              />
+              <Avatar alt="user" img={currentUser.profilePicture} rounded />
             }
           >
             <Dropdown.Header>
               <span className="block text-sm">@{currentUser.username}</span>
-              <span className="block text-sm font-medium truncate">@{currentUser.email}</span>
+              <span className="block text-sm font-medium truncate">
+                @{currentUser.email}
+              </span>
             </Dropdown.Header>
-            <Link to={'/dashboard?tab=profile'}>
+            <Link to={"/dashboard?tab=profile"}>
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
             <Dropdown.Item>Log Out</Dropdown.Item>
           </Dropdown>
-        ) : 
-        (
+        ) : (
           <Link to="/sign-in">
-          <Button
-            className="duration-200 ease-in-out"
-            gradientDuoTone="purpleToBlue"
-            outline
-          >
-            Sign In
-          </Button>
-        </Link>
-        )
-      }
+            <Button
+              className="duration-200 ease-in-out"
+              gradientDuoTone="purpleToBlue"
+              outline
+            >
+              Sign In
+            </Button>
+          </Link>
+        )}
 
-        
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
