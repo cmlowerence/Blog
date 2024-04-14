@@ -60,7 +60,7 @@ export default function FooterCom() {
             <Footer.Icon href='#' icon={BsFacebook}/>
             <Footer.Icon href='#' icon={BsInstagram}/>
             <Footer.Icon href='#' icon={BsTwitterX}/>
-            <Footer.Icon href='https://github.com/cmlowerence' icon={BsGithub}/>
+            <Footer.Icon href='https://github.com/cmlowerence' target="_blank" rel="noopener noreferrer" icon={BsGithub}/>
             <Footer.Icon href='#' icon={BsDribbble}/>
           </div>
         </div>
