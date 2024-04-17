@@ -69,13 +69,14 @@ export default function CreatePost() {
         },
         body: JSON.stringify(formData)
       })
-      const data = res.json();
+      const data = await res.json();
       if (!res.ok){
         setPublishError(data.message);
         return;
       }
       if (res.ok) {
         setPublishError(null);
+        console.log(data.slug);
         navigate(`/post/${data.slug}`)
       }
 
@@ -83,6 +84,7 @@ export default function CreatePost() {
       setPublishError("Something went wrong");
     }
   }
+  console.log(publishError);
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
       <h1 className="text-center text-3xl my-7 font-semibold">Create a post</h1>
@@ -156,7 +158,7 @@ export default function CreatePost() {
           Post
         </Button>
         {
-          publishError && <Alert className="mt-5" color='failure'>{publishError}</Alert>
+          publishError && (<Alert className="mt-5" color='failure'>{publishError}</Alert>)
         }
       </form>
     </div>
