@@ -9,3 +9,6 @@ body{
 .ql-editor{
   font-size: 1.05rem;
 }
+.dark::ql-editor{
+  color: rgb(187, 186, 186);
+}
