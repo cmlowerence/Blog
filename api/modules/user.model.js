@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   profilePicture:{
     type: String, 
-    default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTruS3CzvLcdRd5eqkikzzs-gVBrdh5SsNvumCB_76tXA&s",
+    default: "https://t4.ftcdn.net/jpg/04/62/63/65/360_F_462636502_9cDAYuyVvBY4qYJlHjW7vqar5HYS8h8x.jpg",
   },
   isAdmin: {
     type: Boolean,
