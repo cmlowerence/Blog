@@ -6,7 +6,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 export default function DashPosts() {
   const { currentUser } = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
-  const [showMore, setShowMore] = useState(true);
+  const [showMore, setShowMore] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState("");
   useEffect(() => {
@@ -16,8 +16,8 @@ export default function DashPosts() {
         const data = await res.json();
         if (res.ok) {
           setUserPosts(data.posts);
-          if (data.length < 9) {
-            setShowMore(false);
+          if (data.length > 9) {
+            setShowMore(true);
           }
         }
       } catch (error) {
@@ -38,8 +38,8 @@ export default function DashPosts() {
       const data = await res.json();
       if (res.ok) {
         setUserPosts((prev) => [...prev, ...data.posts]);
-        if (data.posts.length < 9) {
-          setShowMore(false);
+        if (data.posts.length > 9) {
+          setShowMore(true);
         }
       }
     } catch (error) {

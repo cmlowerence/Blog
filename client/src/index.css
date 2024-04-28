@@ -10,3 +10,6 @@ body{
   font-size: 1.05rem;
   padding-bottom: 1rem;
 }
+.ql-editor:dark{
+  color: #fff;
+}
